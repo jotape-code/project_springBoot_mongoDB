@@ -47,4 +47,15 @@ public class UserService {
             throw new DatabaseException(e.getMessage());
         }
     }
+
+    public User update(User obj){
+        Optional<User> newObj = repo.findById(obj.getId());
+        updateData(newObj.get(), obj);
+        return repo.save(newObj.get());
+    }
+
+    public void updateData(User newObj, User obj){
+        newObj.setEmail(obj.getEmail());
+        newObj.setName(obj.getName());
+    }
 }
