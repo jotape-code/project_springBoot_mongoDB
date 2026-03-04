@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.joao.springmongo.Services.exception.ObjectNotFoundException;
+import com.joao.springmongo.dto.UserDTO;
 import com.joao.springmongo.entities.User;
 import com.joao.springmongo.repository.UserRepository;
 
@@ -23,5 +24,13 @@ public class UserService {
     public User findById(String id){
         Optional<User> u = repo.findById(id);
         return u.orElseThrow(() -> new ObjectNotFoundException("Object not found"));
+    }
+
+    public User insert(User obj){
+        return repo.insert(obj);
+    }
+
+    public User fromDto(UserDTO obj){
+        return new User(obj.getId(), obj.getName(), obj.getEmail());
     }
 }
