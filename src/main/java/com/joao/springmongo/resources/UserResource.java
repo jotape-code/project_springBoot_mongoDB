@@ -20,6 +20,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.joao.springmongo.Services.UserService;
 import com.joao.springmongo.dto.UserDTO;
+import com.joao.springmongo.entities.Post;
 import com.joao.springmongo.entities.User;
 
 @RestController
@@ -41,6 +42,12 @@ public class UserResource {
         User user = userService.findById(id);
         UserDTO obj = new UserDTO(user);
         return ResponseEntity.ok().body(obj);
+    }
+
+    @GetMapping(value = "/{id}/posts")
+    public ResponseEntity<List<Post>> findPosts(@PathVariable String id){
+        User obj = userService.findById(id);
+        return ResponseEntity.ok().body(obj.getPosts());
     }
 
     @PostMapping
