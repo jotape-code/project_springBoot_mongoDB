@@ -49,9 +49,10 @@ public class UserService {
     }
 
     public User update(User obj){
-        Optional<User> newObj = repo.findById(obj.getId());
-        updateData(newObj.get(), obj);
-        return repo.save(newObj.get());
+        Optional<User> newObjOptional = repo.findById(obj.getId());
+        User newObj = newObjOptional.orElseThrow(() -> new ObjectNotFoundException("Object not found. Id " + obj.getId()));
+        updateData(newObj, obj);
+        return repo.save(newObj);
     }
 
     public void updateData(User newObj, User obj){
