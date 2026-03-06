@@ -2,11 +2,14 @@ package com.joao.springmongo.entities;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.joao.springmongo.dto.AuthorDTO;
+import com.joao.springmongo.dto.CommentDTO;
 
 @Document
 public class Post implements Serializable{
@@ -20,6 +23,7 @@ public class Post implements Serializable{
     private String body;
 
     private AuthorDTO author;
+    private List<CommentDTO> comments = new ArrayList<>();
 
     public Post(){
     }
@@ -69,6 +73,10 @@ public AuthorDTO getAuthor() {
 
 public void setAuthor(AuthorDTO author) {
     this.author = author;
+}
+
+public List<CommentDTO> getComments(){
+    return comments;
 }
 
 @Override
